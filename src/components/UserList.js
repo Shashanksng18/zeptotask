@@ -1,11 +1,11 @@
 import React from "react";
-import image from "../utils/images/download.png";
 
-const UserList = ({ users, selectHandler, show }) => {
+const UserList = ({ users, selectHandler, show, selectedUser }) => {
+  console.log(selectedUser.length)
   return (
-    <div className="bg-slate-200 h-[400px]">
+    <div className="h-[400px]  rounded-xl absolute w-full mt-3">
       {show && (
-        <ul className="w-[300px] bg-white flex items-center justify-start flex-col m-auto h-[200px] overflow-scroll absolute  left-4">
+        <ul className="w-[250px] bg-white h-auto min-h-[50px] overflow-scroll shadow-white shadow-slate-400">
           {users.map((item, index) => (
             <li
               key={index + 2}
@@ -20,6 +20,7 @@ const UserList = ({ users, selectHandler, show }) => {
               {item.name}
             </li>
           ))}
+          {selectedUser.length >= 5  && <span>list is empty</span>}
         </ul>
       )}
     </div>
