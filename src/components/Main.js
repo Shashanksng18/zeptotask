@@ -24,10 +24,12 @@ const Main = () => {
       );
       setUsers(matchFilter);
     } else {
-      const match = userData.filter((user) =>
-        user.name.toLowerCase().includes(value.toLowerCase())
-      );
-      setUsers(match);
+      // const match = userData.filter((user) =>
+      //   user.name.toLowerCase().includes(value.toLowerCase())
+      // );
+      // setUsers(match);
+
+      setUsers((prev) => prev.filter((user) => user.name.toLowerCase().includes(value.toLowerCase())))
     }
   };
 
@@ -38,6 +40,7 @@ const Main = () => {
     setSelectedUser([...selectedUser, ...list]);
     const match = users.filter((user) => user !== list[0]);
     setUsers(match);
+    setShow(!show)
   };
 
   const handleShow = () => {
@@ -51,14 +54,17 @@ const Main = () => {
   };
   return (
     <section>
+      <h2 className="text-blue-300 font-bold text-2xl my-2 ml-2">Pick User</h2>
       <UserInput
         onChangeHandler={onChangeHandler}
         selectedUser={selectedUser}
         handleShow={handleShow}
         RemoveHandler={RemoveHandler}
-        
+        users={users}
+        selectHandler={selectHandler}
+        show={show}
       />
-      <UserList users={users} selectHandler={selectHandler} show={show} />
+      {/* <UserList users={users} selectHandler={selectHandler} show={show} selectedUser={selectedUser}/> */}
     </section>
   );
 };

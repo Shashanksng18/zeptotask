@@ -1,34 +1,48 @@
 import React, { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import UserList from "./UserList";
 const UserInput = ({
   onChangeHandler,
   selectedUser,
   handleShow,
   RemoveHandler,
+  users,
+  selectHandler,
+  show
 }) => {
   return (
     <>
-      <input
-        type="text"
-        onChange={(e) => onChangeHandler(e)}
-        onClick={handleShow}
-        className="outline-none border-blue-300 w-full border-b-2 py-4"
-      />
-      <ul className="fixed top-2 left-0 flex flex-wrap">
+     <ul className="flex flex-wrap gap-4 relative">
         {selectedUser.map((item, index) => (
-          <li key={index+1} className="relative ml-2 bg-slate-200 rounded-xl px-4 py-1 flex item-center justify-start gap-2">
+          <li
+            key={index + 1}
+            className="ml-2 bg-slate-200 rounded-xl px-4 py-1 flex item-center justify-start gap-2 z-[999] h-10"
+          >
             <img
-              className="w-[30px] aspect-square object-contain"
+              className="w-[20px] aspect-square object-contain roundex-[50%]"
               src={item.image}
             />
-            {item.name}
+            <span>{item.name}</span>
             <RxCross2
               className="inline-block ml-2"
               onClick={() => RemoveHandler(item)}
             />
           </li>
         ))}
+       <li className="border-b-4 border-blue-300 relative">
+        <input
+          type="text"
+          onChange={(e) => onChangeHandler(e)}
+          onClick={handleShow}
+          className="outline-none relative py-4"
+        />
+         <UserList users={users} selectHandler={selectHandler} show={show} selectedUser={selectedUser}/>
+      </li>
+     
       </ul>
+      
+    
+     
     </>
   );
 };
